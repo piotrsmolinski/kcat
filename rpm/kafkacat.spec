@@ -1,14 +1,14 @@
 Name:     kafkacat
-Version:  1.2.0
+Version:  1.6.0
 Release:  1%{?dist}
-Summary:  kafkacat is a generic non-JVM producer and consumer for Apache Kafka 0.8, think of it as a netcat for Kafka.
+Summary:  kafkacat is a generic non-JVM producer and consumer for Apache Kafka, think of it as a netcat for Kafka.
 Group:    Productivity/Networking/Other
 License:  BSD-2-Clause
 URL:      https://github.com/edenhill/kafkacat
 Source:   kafkacat-%{version}.tar.gz
-Requires: librdkafka1
+Requires: librdkafka1 avro-c confluent-libserdes yajl jansson
 
-BuildRequires: zlib-devel gcc >= 4.1 librdkafka-devel
+BuildRequires: make gcc-c++ >= 4.1 librdkafka-devel avro-c-devel confluent-libserdes-devel yajl-devel jansson-devel 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 %description
@@ -25,7 +25,7 @@ them to stdout using the configured message delimiter.
 kafkacat also features a Metadata list (-L) mode to display the current state
 of the Kafka cluster and its topics and partitions.
 
-kafkacat is fast and lightweight; statically linked it is no more than 150Kb.
+kafkacat is fast and lightweight; dynamically linked it is no more than 100Kb.
 
 %prep
 %setup -q
@@ -50,6 +50,10 @@ rm -rf %{buildroot}
 %doc LICENSE
 
 %changelog
+
+* Mon Nov 16 2020 Piotr Smolinski <piotr.smolinski@cconfluent.io> 1.6.0
+- Relase 1.6.0
+
 * Wed Jun 03 2015 Magnus Edenhill <magnus@edenhill.se> 1.2.0-1
 - Relase 1.2.0
 
