@@ -1,14 +1,14 @@
 Name:     kcat
-Version:  1.2.0
+Version:  1.7.0
 Release:  1%{?dist}
-Summary:  kcat is a generic non-JVM producer and consumer for Apache Kafka 0.8, think of it as a netcat for Kafka.
+Summary:  kcat is a generic non-JVM producer and consumer for Apache Kafka, think of it as a netcat for Kafka.
 Group:    Productivity/Networking/Other
 License:  BSD-2-Clause
 URL:      https://github.com/edenhill/kcat
 Source:   kcat-%{version}.tar.gz
-Requires: librdkafka1
+Requires: librdkafka1 avro-c confluent-libserdes yajl jansson
 
-BuildRequires: zlib-devel gcc >= 4.1 librdkafka-devel
+BuildRequires: make gcc-c++ >= 4.1 librdkafka-devel avro-c-devel confluent-libserdes-devel yajl-devel jansson-devel 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 %description
@@ -52,6 +52,10 @@ rm -rf %{buildroot}
 %doc LICENSE
 
 %changelog
+
+* Mon Aug 31 2021 Piotr Smolinski <piotr.smolinski@cconfluent.io> 1.7.0
+- Relase 1.7.0
+
 * Wed Jun 03 2015 Magnus Edenhill <magnus@edenhill.se> 1.2.0-1
 - Relase 1.2.0
 
